@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { UserRole } from '../types';
-import { TrendingUp, TrendingDown, Users, Trophy, Wallet, BarChart3, Settings, Zap, Award, Target, ChevronRight, Menu, X, Sparkles, Flame, Star } from './icons/LucideIcons';
+import { TrendingUp, TrendingDown, Users, Trophy, Wallet, BarChart3, Settings, Zap, Award, Target, ChevronRight, Menu, X, Sparkles, Flame, Star, ChevronLeft, Edit } from './icons/LucideIcons';
 
 interface DashboardProps {
   user: {
@@ -141,7 +141,7 @@ const DashboardHome = ({ tournaments, userStats }: { tournaments: any[], userSta
     </div>
 );
 
-const TournamentManagement = ({ tournaments }: { tournaments: any[] }) => {
+const TournamentManagement = ({ tournaments, onViewDetails }: { tournaments: any[], onViewDetails: (id: string) => void }) => {
     const [activeTab, setActiveTab] = useState('All');
 
     const filteredTournaments = tournaments.filter(t => {
@@ -200,10 +200,9 @@ const TournamentManagement = ({ tournaments }: { tournaments: any[] }) => {
                             <p className="text-xs text-white/60 font-semibold uppercase">Your Revenue</p>
                             <p className="text-2xl font-black bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">₹{t.revenue}</p>
                             </div>
-                            <div className="flex gap-2">
-                            <button className="px-4 py-2 text-xs backdrop-blur-xl bg-white/10 text-white rounded-lg font-bold border border-white/20 hover:bg-white/20 transition-all">Analytics</button>
-                            <NeonButton variant="primary" className="text-xs py-2 px-4">Promote</NeonButton>
-                            </div>
+                            <NeonButton onClick={() => onViewDetails(t.id)} variant="primary" className="text-sm py-2.5 px-5">
+                                Manage
+                            </NeonButton>
                         </div>
                         </GlassCard>
                     )
@@ -212,6 +211,64 @@ const TournamentManagement = ({ tournaments }: { tournaments: any[] }) => {
         </div>
     );
 };
+
+const TournamentDetailView = ({ tournament, onBack, onDelete }: { tournament: any, onBack: () => void, onDelete: (id: string) => void }) => {
+    const badge = getBadgeInfo(tournament);
+
+    return (
+        <div className="space-y-5 animate-fadeIn">
+            <button onClick={onBack} className="flex items-center gap-2 text-white/70 hover:text-white font-bold transition-colors">
+                <ChevronLeft size={20} />
+                Back to Tournaments
+            </button>
+
+            <GlassCard className="p-5">
+                <div className="flex items-start justify-between mb-4">
+                    <div>
+                        <h2 className="text-2xl font-black text-white">{tournament.name}</h2>
+                        <span className={`inline-block mt-2 px-3 py-1.5 text-xs font-bold rounded-lg bg-gradient-to-r ${badge.gradient} text-white shadow-lg`}>
+                            {badge.text}
+                        </span>
+                    </div>
+                    <button className="backdrop-blur-xl bg-white/10 p-3 rounded-xl border border-white/20 hover:bg-white/20 transition-all">
+                        <Edit size={20} className="text-white" />
+                    </button>
+                </div>
+                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
+                    <div>
+                        <p className="text-xs text-white/60 font-semibold uppercase">Prize Pool</p>
+                        <p className="text-2xl font-black bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">₹{tournament.pool.toLocaleString()}</p>
+                    </div>
+                     <div>
+                        <p className="text-xs text-white/60 font-semibold uppercase">Entry Fee</p>
+                        <p className="text-2xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">₹{tournament.entry.toLocaleString()}</p>
+                    </div>
+                </div>
+            </GlassCard>
+
+            <GlassCard>
+                 <div className="p-4 border-b border-white/10">
+                    <h3 className="font-bold text-white">Player List ({tournament.players}/{tournament.maxPlayers})</h3>
+                </div>
+                <div className="max-h-60 overflow-y-auto divide-y divide-white/10">
+                    {tournament.participants.length > 0 ? tournament.participants.map((player: string, i: number) => (
+                         <div key={i} className="p-3 flex items-center justify-between text-sm hover:bg-white/5">
+                            <span className="font-semibold text-white/90">#{i + 1} {player}</span>
+                            <span className="text-xs text-white/50">Joined Nov {i+1}</span>
+                        </div>
+                    )) : (
+                        <div className="p-4 text-center text-sm text-white/60">No players have joined yet.</div>
+                    )}
+                </div>
+            </GlassCard>
+
+            <NeonButton onClick={() => onDelete(tournament.id)} variant="danger" className="w-full">
+                Delete Tournament
+            </NeonButton>
+        </div>
+    )
+}
+
 
 const WalletSection = ({ userStats }: { userStats: any }) => (
     <div className="space-y-5">
@@ -348,6 +405,7 @@ const NeonButton: React.FC<{ children: React.ReactNode, variant?: string, onClic
       if (variant === 'success') return 'bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 shadow-lg shadow-emerald-500/50';
       if (variant === 'purple') return 'bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 shadow-lg shadow-purple-500/50';
       if (variant === 'gold') return 'bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-400 hover:to-orange-500 shadow-lg shadow-yellow-500/50';
+      if (variant === 'danger') return 'bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-400 hover:to-rose-500 shadow-lg shadow-red-500/50';
       return 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-lg shadow-cyan-500/50';
     };
     
@@ -382,9 +440,9 @@ const StatCard: React.FC<{ title: string, value: string | number, change?: numbe
 );
 
 const initialTournaments = [
-  { id: 't1', name: 'BGMI Pro League', players: 92, maxPlayers: 100, entry: 50, revenue: 3450, status: 'open', pool: 4000 },
-  { id: 't2', name: 'Free Fire Masters', players: 100, maxPlayers: 100, entry: 30, revenue: 2250, status: 'live', pool: 2500 },
-  { id: 't3', name: 'Valorant Evening', players: 45, maxPlayers: 64, entry: 100, revenue: 3375, status: 'open', pool: 5000 },
+  { id: 't1', name: 'BGMI Pro League', players: 92, maxPlayers: 100, entry: 50, revenue: 3450, status: 'open', pool: 4000, participants: ['Player1', 'ProGamerX', 'Shadow_King', 'NoobMaster69', 'AlphaSniper'] },
+  { id: 't2', name: 'Free Fire Masters', players: 100, maxPlayers: 100, entry: 30, revenue: 2250, status: 'live', pool: 2500, participants: ['FF_Legend', 'Booyah_Boss'] },
+  { id: 't3', name: 'Valorant Evening', players: 45, maxPlayers: 64, entry: 100, revenue: 3375, status: 'open', pool: 5000, participants: ['JettMain', 'CypherGod', 'Reyna_MVP'] },
 ];
 
 const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStats }) => {
@@ -392,6 +450,7 @@ const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStat
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [particles, setParticles] = useState<{id: number, x: number, y: number, size: number, duration: number}[]>([]);
   const [tournaments, setTournaments] = useState(initialTournaments);
+  const [selectedTournamentId, setSelectedTournamentId] = useState<string | null>(null);
   
   const stats = userStats || {
     totalWinnings: 0,
@@ -437,6 +496,13 @@ const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStat
     return () => clearInterval(interval);
   }, []);
 
+  const handleDeleteTournament = (id: string) => {
+    if (window.confirm('Are you sure you want to delete this tournament? This action cannot be undone.')) {
+        setTournaments(prev => prev.filter(t => t.id !== id));
+        setSelectedTournamentId(null); // Go back to the list view
+    }
+  };
+
   const menuItems = [
     { id: 'home', label: 'Dashboard', icon: Zap },
     { id: 'tournaments', label: 'Tournaments', icon: Trophy },
@@ -448,7 +514,20 @@ const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStat
   const renderContent = () => {
     switch (activeSection) {
       case 'home': return <DashboardHome tournaments={tournaments} userStats={stats} />;
-      case 'tournaments': return <TournamentManagement tournaments={tournaments} />;
+      case 'tournaments':
+        const selectedTournament = tournaments.find(t => t.id === selectedTournamentId);
+        return selectedTournament ? (
+          <TournamentDetailView
+            tournament={selectedTournament}
+            onBack={() => setSelectedTournamentId(null)}
+            onDelete={handleDeleteTournament}
+          />
+        ) : (
+          <TournamentManagement 
+            tournaments={tournaments}
+            onViewDetails={(id) => setSelectedTournamentId(id)}
+          />
+        );
       case 'wallet': return <WalletSection userStats={stats} />;
       case 'pricing': return <PricingSection />;
       default: return (
@@ -481,6 +560,13 @@ const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStat
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-20px); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
         }
       `}</style>
 

@@ -121,3 +121,11 @@ export const Menu: React.FC<IconProps> = (props) => (
 export const Sparkles: React.FC<IconProps> = (props) => (
     <Icon {...props}><path d="m12 3-1.9 5.8-5.8 1.9 5.8 1.9 1.9 5.8 1.9-5.8 5.8-1.9-5.8-1.9z"/></Icon>
 );
+
+export const ChevronLeft: React.FC<IconProps> = (props) => (
+  <Icon {...props}><path d="m15 18-6-6 6-6" /></Icon>
+);
+
+export const Edit: React.FC<IconProps> = (props) => (
+  <Icon {...props}><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></Icon>
+);
