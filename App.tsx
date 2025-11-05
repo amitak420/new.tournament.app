@@ -5,10 +5,10 @@ import PlayerDashboard from './components/PlayerDashboard';
 import OrganiserDashboard from './components/OrganiserDashboard';
 import AdminDashboard from './components/AdminDashboard';
 // Firebase Auth
-import { onAuthStateChanged, signOut, User as FirebaseUser } from '@firebase/auth';
+import { onAuthStateChanged, signOut, User as FirebaseUser } from 'firebase/auth';
 import { auth } from './firebase';
 // Firebase Realtime Database
-import { ref, onValue } from '@firebase/database';
+import { ref, onValue } from 'firebase/database';
 import { database } from './firebase';
 
 interface User {

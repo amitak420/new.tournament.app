@@ -5,9 +5,9 @@ import AdminModal from './AdminModal';
 import Header from './Header';
 import Footer from './Footer';
 import Features from './Features';
-import Promo from './Promo';
 import PlayerCardIcon from './icons/PlayerCardIcon';
 import OrganiserCardIcon from './icons/OrganiserCardIcon';
+import Promo from './Promo';
 
 
 interface LandingPageProps {
@@ -86,8 +86,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onLogin, theme, toggleTheme }
               />
             </div>
             
-            <Features />
             <Promo />
+            <Features />
 
           </div>
         </main>
@@ -110,75 +110,70 @@ const RoleCard: React.FC<{ role: UserRole; onClick: () => void }> = ({ role, onC
     label: 'Player Access',
     title: 'Join as Player',
     description: 'Register, join tournaments, track leaderboards, and win rewards.',
-    stat: 'Instant match-ready',
-    cardClass: 'player-card',
-    titleClass: 'player-title',
+    feature: 'Instant match-ready',
     icon: <PlayerCardIcon />,
-    borderColor: 'border-blue-500/40',
-    hoverBorderColor: 'hover:border-blue-400/80',
-    shadowColor: 'hover:shadow-[0_18px_55px_rgba(59,130,246,0.25)]'
+    cardClass: 'border-blue-500/30 hover:border-blue-500/60 hover:shadow-blue-500/10',
+    labelClass: 'text-green-400',
+    labelDotClass: 'bg-green-400',
+    featureDotClass: 'bg-blue-500',
   };
 
   const organiserConfig = {
     label: 'Tournament Host',
     title: 'Host Tournament',
     description: 'Create & manage brackets, entries, prizes and live standings.',
-    stat: 'Secure organiser tools',
-    cardClass: 'organiser-card',
-    titleClass: 'organiser-title',
+    feature: 'Secure organiser tools',
     icon: <OrganiserCardIcon />,
-    borderColor: 'border-orange-400/40',
-    hoverBorderColor: 'hover:border-orange-400/80',
-    shadowColor: 'hover:shadow-[0_18px_55px_rgba(249,115,22,0.25)]'
+    cardClass: 'border-orange-500/30 hover:border-orange-500/60 hover:shadow-orange-500/10',
+    labelClass: 'text-orange-400',
+    labelDotClass: 'bg-orange-400',
+    featureDotClass: 'bg-orange-500',
   };
 
   const config = isPlayer ? playerConfig : organiserConfig;
 
   return (
-    <>
-    {/* FIX: Replaced non-standard <style jsx> with standard <style> tag. */}
-    <style>{`
-      .player-card {
-        background: radial-gradient(circle at 3% 5%, rgba(59, 130, 246, 0.16), rgba(3, 7, 18, 0.05)), rgba(3, 7, 18, 0.42);
-      }
-      .organiser-card {
-        background: linear-gradient(140deg, rgba(249, 115, 22, 0.28) 0%, rgba(3, 7, 18, 0.1) 53%), rgba(3, 7, 18, 0.4);
-      }
-      .player-title {
-        background: linear-gradient(90deg, #fff 0%, #e2e8f0 50%, #3b82f6 90%);
-        -webkit-background-clip: text; background-clip: text; color: transparent;
-      }
-      .organiser-title {
-        background: linear-gradient(90deg, #fff 0%, #fde68a 60%, #f97316 95%);
-        -webkit-background-clip: text; background-clip: text; color: transparent;
-      }
-    `}</style>
     <article 
-      onClick={onClick}
-      className={`group relative flex cursor-pointer flex-col justify-between gap-4 rounded-3xl border p-5 text-left shadow-xl backdrop-blur-xl transition-all duration-200 ease-out hover:-translate-y-1.5 
-      ${config.cardClass} ${config.borderColor} ${config.hoverBorderColor} ${config.shadowColor}`}
+      className={`group flex flex-col justify-between gap-6 rounded-3xl border bg-slate-900/40 p-6 sm:p-8 text-left shadow-xl backdrop-blur-xl transition-all duration-300 ease-out hover:-translate-y-1 ${config.cardClass}`}
     >
-      <div className="flex items-start justify-between">
-        <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/20 bg-slate-900/50 px-2 py-1 text-xs uppercase tracking-widest text-slate-300">
-            <span className={`h-1.5 w-1.5 rounded-full ${isPlayer ? 'bg-green-500' : 'bg-orange-500'}`}></span>{config.label}
+      <div>
+        <div className="flex items-start justify-between">
+          <div className={`inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider ${config.labelClass}`}>
+            <span className={`h-2 w-2 rounded-full ${config.labelDotClass}`}></span>
+            {config.label}
           </div>
-          <h2 className={`mt-2 text-3xl font-bold ${config.titleClass}`}>{config.title}</h2>
-          <p className="mt-1 max-w-xs text-sm text-slate-200/60 light:text-slate-400">{config.description}</p>
-          <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-slate-200/10 bg-slate-900/60 px-3 py-1.5 text-xs font-semibold text-slate-300">
-            <span className={`h-1.5 w-1.5 rounded-full ${isPlayer ? 'bg-blue-500' : 'bg-yellow-500'}`}></span>{config.stat}
-          </div>
-        </div>
-        <div className="grid h-14 w-14 place-items-center rounded-2xl border border-white/20 backdrop-blur-lg">
+          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/5">
             {config.icon}
+          </div>
+        </div>
+        <h2 className="mt-4 text-3xl sm:text-4xl font-black text-white">{config.title}</h2>
+        <p className="mt-3 max-w-xs text-base text-slate-200/60">{config.description}</p>
+        <div className="mt-6 flex items-center gap-3 rounded-full bg-white/5 px-4 py-2 text-sm font-semibold text-slate-300 w-fit">
+          <span className={`h-2 w-2 rounded-full ${config.featureDotClass}`}></span>
+          {config.feature}
         </div>
       </div>
-      <div className="mt-2 flex items-center justify-between">
-        <span className="text-xs text-slate-200/40">{isPlayer ? 'Tap to sign in / create account' : 'Launch events in minutes'}</span>
-        <div className="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-xl text-white transition-transform duration-150 ease-out group-hover:translate-x-1">→</div>
-      </div>
+      
+      {isPlayer ? (
+        <button
+          onClick={onClick}
+          className="mt-6 flex w-full items-center justify-between rounded-xl border border-white/20 bg-slate-800/20 p-4 text-left text-slate-300 backdrop-blur-sm transition-all duration-300 hover:border-blue-400/60 hover:bg-slate-800/50 hover:shadow-lg hover:shadow-blue-500/20"
+        >
+          <span className="font-semibold">Tap to sign in / create account</span>
+          <span className="text-2xl transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </button>
+      ) : (
+        <button
+          onClick={onClick}
+          className="mt-6 flex w-full items-center justify-between rounded-xl border border-white/20 bg-slate-800/20 p-4 text-left text-slate-300 backdrop-blur-sm transition-all duration-300 hover:border-orange-400/60 hover:bg-slate-800/50 hover:shadow-lg hover:shadow-orange-500/20"
+        >
+          <span className="font-semibold">Launch events in minutes</span>
+          <div className="grid h-10 w-10 place-items-center rounded-full bg-white/10 transition-all duration-300 group-hover:bg-white/20">
+            <span className="text-2xl transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </div>
+        </button>
+      )}
     </article>
-    </>
   );
 };
 

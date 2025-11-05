@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { UserRole } from '../types';
 // FIX: Corrected firebase auth import path
-import { signInWithEmailAndPassword } from '@firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 
 
