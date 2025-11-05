@@ -1,8 +1,11 @@
 // services/aiMock.ts
-// Safe mock used for production build / Vercel so no real cloud SDKs are required.
+// Safe mock replacement for client-side AI SDKs used in the app.
 
 export async function askAI(prompt: string) {
-  return { text: `Mock reply: ${String(prompt).slice(0, 200)}`, raw: { mock: true } };
+  return {
+    text: `Mock reply: ${String(prompt).slice(0, 200)}`,
+    raw: { debug: true },
+  };
 }
 
 export function createClient(_cfg?: any) {
@@ -18,16 +21,16 @@ export function createClient(_cfg?: any) {
   };
 }
 
-// Named export that some components may expect (GoogleGenAI or similar)
+// Provide named export that some code expect
 export const GoogleGenAI = {
-  createClient: createClient,
   ask: (p: any) => askAI(p),
-  generate: async (opts: any) => (await createClient().generate(opts)),
+  createClient,
 };
 
-// default export for `import genai from '@google/genai'` style imports
+// Default export for `import genai from '@google/genai'`
 const defaultExport = {
   ask: (p: any) => askAI(p),
   createClient,
 };
+
 export default defaultExport;
