@@ -7,12 +7,13 @@ const rootElement = document.getElementById("root");
 
 window.addEventListener("error", (e) => {
   console.error("Window error:", e.error || e.message);
-  document.body.innerHTML = `<pre style="color:red;font-size:16px;">Error: ${e.message}</pre>`;
+  // show minimal debug
+  document.body.innerHTML = `<pre style="color:red;">Error: ${e.message || e.error}</pre>`;
 });
 
 window.addEventListener("unhandledrejection", (e) => {
   console.error("Promise rejection:", e.reason);
-  document.body.innerHTML = `<pre style="color:orange;font-size:16px;">Promise Rejection: ${JSON.stringify(e.reason)}</pre>`;
+  document.body.innerHTML = `<pre style="color:orange;">Promise Rejection: ${JSON.stringify(e.reason)}</pre>`;
 });
 
 if (rootElement) {
@@ -23,5 +24,5 @@ if (rootElement) {
     </React.StrictMode>
   );
 } else {
-  document.body.innerHTML = `<h1 style="color:red;">❌ Root div not found!</h1>`;
+  document.body.innerHTML = `<h1 style="color:#d33;">❌ Root div not found!</h1>`;
 }
