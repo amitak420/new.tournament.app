@@ -1,20 +1,54 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# eSports Arena
 
-# Run and deploy your AI Studio app
+This project is a modern eSports tournament platform built with Vite, React, TypeScript, and Tailwind CSS. It's configured for easy and efficient deployment on Netlify.
 
-This contains everything you need to run your app locally.
+## Local Development
 
-View your app in AI Studio: https://ai.studio/apps/drive/1YdNS2pY5H9jPEPSIZqGcMbpHzMLZfwZX
+To run the application on your local machine, follow these steps:
 
-## Run Locally
+1.  **Install Dependencies:**
+    ```sh
+    npm install
+    ```
 
-**Prerequisites:**  Node.js
+2.  **Environment Variables:**
+    Create a `.env.local` file in the root of the project and add your Firebase configuration. You can copy the contents of `.env.example` as a template.
 
+3.  **Run the Development Server:**
+    ```sh
+    npm run dev
+    ```
+    The application will be available at `http://localhost:5173`.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Build for Production
+
+To create an optimized production build of the application:
+
+1.  **Build the Project:**
+    ```sh
+    npm run build
+    ```
+    This command will generate a `dist` directory with all the static assets ready for deployment.
+
+## Deploy to Netlify
+
+This repository is ready for deployment on Netlify.
+
+1.  **Push to GitHub:**
+    Commit your changes and push them to your GitHub repository.
+
+2.  **Connect Repository in Netlify:**
+    - Log in to your Netlify account.
+    - Click on "Add new site" -> "Import an existing project".
+    - Connect to your Git provider (GitHub) and select your repository.
+
+3.  **Deploy Settings:**
+    Netlify should automatically detect the settings from the `netlify.toml` file. Verify they are correct:
+    - **Build command:** `npm run build`
+    - **Publish directory:** `dist`
+
+4.  **Add Environment Variables:**
+    In your Netlify site settings, go to "Site configuration" > "Environment variables" and add the Firebase keys you have in your `.env.local` file.
+
+5.  **Click Deploy:**
+    Netlify will build and deploy your site.

@@ -1,24 +1,37 @@
-<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>eSports Arena (Demo)</title>
-    <link rel="stylesheet" href="/safe.css" />
-    <meta name="robots" content="noindex">
-  </head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eSports Arena | Enter the Arena</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+      // Immediately set the theme on page load to prevent flashing
+      (function() {
+        const theme = localStorage.getItem("theme");
+        // Default to dark theme if no setting is found
+        if (theme !== "light") {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.28.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.0",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.5.0/",
+    "vite": "https://aistudiocdn.com/vite@^7.2.0"
+  }
+}
+</script>
+</head>
   <body>
     <div id="root"></div>
-
-    <!-- Unregister old service workers to avoid cross-origin SW errors -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations()
-          .then(regs => regs.forEach(r => r.unregister()))
-          .catch(()=>{});
-      }
-    </script>
-
-    <script type="module" src="/src/index.tsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,15 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { UserRole } from '../types';
-import { TrendingUp, TrendingDown, Users, Trophy, Wallet, BarChart3, Settings, Zap, Award, Target, ChevronRight, Menu, X, Sparkles, Flame, Star, ChevronLeft, Edit } from './icons/LucideIcons';
-
-interface DashboardProps {
-  user: {
-    email: string;
-    role: UserRole;
-  };
-  onLogout: () => void;
-  userStats: any;
-}
+import React, { useState, useEffect, useContext } from 'react';
+import { UserRole } from '../types/types';
+import { TrendingUp, TrendingDown, Users, Trophy, Wallet, BarChart3, Settings, Zap, Award, Target, ChevronRight, Menu, X, Sparkles, Flame, Star, ChevronLeft, Edit } from '../assets/icons/LucideIcons';
+import { AuthContext } from '../context/AuthContext';
 
 // Helper to determine the visual style of a tournament badge based on its state
 const getBadgeInfo = (tournament: any) => {
@@ -445,7 +437,8 @@ const initialTournaments = [
   { id: 't3', name: 'Valorant Evening', players: 45, maxPlayers: 64, entry: 100, revenue: 3375, status: 'open', pool: 5000, participants: ['JettMain', 'CypherGod', 'Reyna_MVP'] },
 ];
 
-const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStats }) => {
+const OrganiserDashboard: React.FC = () => {
+  const { loggedInUser, userStats, logout } = useContext(AuthContext);
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [particles, setParticles] = useState<{id: number, x: number, y: number, size: number, duration: number}[]>([]);
@@ -631,7 +624,7 @@ const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStat
                 </button>
               ))}
                 <button
-                  onClick={onLogout}
+                  onClick={logout}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold transition-all text-red-500 dark:text-red-400/70 hover:bg-red-500/10`}
                 >
                   <X size={22} />

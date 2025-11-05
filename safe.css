@@ -1,7 +1,0 @@
-/* safe.css - minimal fallback so Vercel demo page doesn't break */
-html,body,#root { height:100%; margin:0; font-family: system-ui, Arial, sans-serif; }
-body {
-  display:flex; align-items:center; justify-content:center;
-  background: linear-gradient(180deg,#071028,#071428); color:#eee;
-}
-h1 { font-size:48px; }

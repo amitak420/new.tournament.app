@@ -1,21 +1,48 @@
-// App.tsx
-import React from "react";
+import React, { useContext } from 'react';
+import { UserRole } from './types/types';
+import LandingPage from './components/LandingPage';
+import PlayerDashboard from './components/PlayerDashboard';
+import OrganiserDashboard from './components/OrganiserDashboard';
+import AdminDashboard from './components/AdminDashboard';
+import { AuthContext } from './context/AuthContext';
 
-export default function App() {
-  return (
-    <div style={{
-      minHeight: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      background: "linear-gradient(#051029, #07112a)",
-      color: "#fff",
-      fontFamily: "Inter, Arial, sans-serif"
-    }}>
-      <div style={{ textAlign: "center" }}>
-        <h1 style={{fontSize: 28, margin: 0}}>🔥 eSports Arena</h1>
-        <p style={{opacity: 0.8, marginTop: 10}}>Demo build loaded — React is rendering.</p>
+const App: React.FC = () => {
+  const { loggedInUser, userStats, isLoading, theme, toggleTheme } = useContext(AuthContext);
+
+  const renderDashboard = () => {
+    if (!loggedInUser) return null;
+
+    switch (loggedInUser.role) {
+      case UserRole.PLAYER:
+        return (
+            <PlayerDashboard />
+        );
+      case UserRole.ORGANISER:
+        return (
+          <OrganiserDashboard />
+        );
+      case UserRole.ADMIN:
+        return (
+          <AdminDashboard />
+        );
+      default:
+        return null;
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-xl font-semibold">Loading eSports Arena...</div>
       </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      {loggedInUser ? renderDashboard() : <LandingPage theme={theme} toggleTheme={toggleTheme} />}
     </div>
   );
-}
+};
+
+export default App;
