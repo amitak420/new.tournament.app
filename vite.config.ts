@@ -5,26 +5,16 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   return {
-    server: {
-      port: 3000,
-      host: '0.0.0.0',
-    },
     plugins: [react()],
-    define: {
-      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY || ''),
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || '')
-    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
-        // Map real SDK imports to our mock so build doesn't need keys
         '@google/genai': path.resolve(__dirname, 'services/aiMock.ts'),
-        'genai': path.resolve(__dirname, 'services/aiMock.ts'),
       }
     },
-    build: {
-      // optional tweaks if Vercel needs
-      target: 'es2020'
-    }
+    define: {
+      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
+    },
   };
 });
