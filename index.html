@@ -1,111 +1,26 @@
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>eSports Arena | Enter the Arena</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>eSports Arena (Demo)</title>
+
+    <!-- Minimal safe CSS while debugging -->
+    <link rel="stylesheet" href="/safe.css" />
+
+    <meta name="robots" content="noindex">
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Unregister any old service workers (prevents AI Studio SW origin errors) -->
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-        }
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister())).catch(()=>{});
+      }
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --bg: #f8fafc;
-        --text: #1f2937;
-        --surface: rgba(248, 250, 252, 0.7);
-        --blue: #3b82f6;
-        --purple: #8b5cf6;
-        --orange: #f97316;
-        --gold: #fbbf24;
-        --muted: #94a3b8;
-        --header-h: 68px;
-        --modal-overlay-bg: rgba(241, 245, 249, 0.8);
-        --modal-content-bg: #ffffff;
-      }
-      html.dark {
-        --bg: radial-gradient(circle at 10% 10%, #0f172a 0%, #040617 45%, #030712 100%);
-        --text: #e2e8f0;
-        --surface: rgba(3, 7, 18, 0.55);
-        --modal-overlay-bg: radial-gradient(circle at center, rgba(15, 23, 42, 0.2) 30%, rgba(3, 7, 18, 0.8));
-        --modal-content-bg: radial-gradient(circle at 0% 0%, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.35));
-      }
-      body {
-        margin: 0;
-        font-family: "Urbanist", "Poppins", "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        transition: background 300ms ease-out, color 300ms ease-out;
-        position: relative;
-        overflow-x: hidden;
-      }
-      html.dark body::before,
-      html.dark body::after {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        border-radius: 50%;
-        filter: blur(150px);
-        animation: aurora 15s infinite linear alternate;
-      }
-      html.dark body::before {
-        width: 600px;
-        height: 600px;
-        background-color: rgba(139, 92, 246, 0.15); /* --purple */
-        top: -200px;
-        left: -200px;
-      }
-      html.dark body::after {
-        width: 500px;
-        height: 500px;
-        background-color: rgba(59, 130, 246, 0.1); /* --blue */
-        bottom: -150px;
-        right: -150px;
-        animation-duration: 20s;
-        animation-delay: -5s;
-      }
-      @keyframes aurora {
-        0% { transform: translate(0, 0) rotate(0deg); }
-        50% { transform: translate(100px, 80px) rotate(180deg); }
-        100% { transform: translate(-20px, -50px) rotate(360deg); }
-      }
-      @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
-      }
-    </style>
-    <script>
-      // Immediately set the theme on page load to prevent flashing
-      (function() {
-        const theme = localStorage.getItem("theme");
-        // Default to dark theme if no setting is found
-        if (theme !== "light") {
-          document.documentElement.classList.add("dark");
-        }
-      })();
-    </script>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@18.3.1",
-    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
-    "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime",
-    "firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
-    "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js",
-    "firebase/database": "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js",
-    "@google/genai": "https://esm.sh/@google/genai",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "firebase/": "https://aistudiocdn.com/firebase@^12.5.0/"
-  }
-}
-</script>
-</head>
-  <body>
-    <div id="root"></div>
+
+    <!-- load app entry -->
     <script type="module" src="/index.tsx"></script>
-  </body>
+  </body>
 </html>
