@@ -6,11 +6,12 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      // Map problematic client-side SDK imports to our safe mock
       "@google/genai": path.resolve(__dirname, "services/aiMock.ts"),
-      // firebase client imports can be mapped if they cause build errors:
       "firebase/app": path.resolve(__dirname, "services/aiMock.ts"),
       "firebase/auth": path.resolve(__dirname, "services/aiMock.ts"),
       "firebase/database": path.resolve(__dirname, "services/aiMock.ts"),
+      // project root alias
       "@": path.resolve(__dirname, "."),
     },
   },
