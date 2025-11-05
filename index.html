@@ -10,14 +10,16 @@
   <body>
     <div id="root"></div>
 
-    <!-- Unregister any old service workers (prevents AI Studio SW origin errors) -->
+    <!-- Unregister old service workers (prevent SW origin errors) -->
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister())).catch(()=>{});
       }
     </script>
 
-    <!-- This file will be created by Vite build. DO NOT point browser at .tsx in production. -->
-    <script type="module" src="/assets/index-PLACEHOLDER.js"></script>
+    <!-- Let Vite/Build inject the real bundle in production.
+         Keep module src pointing to your app entry (index.tsx).
+         During build Vite will replace with compiled assets. -->
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
