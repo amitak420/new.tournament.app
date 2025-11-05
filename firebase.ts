@@ -1,24 +1,44 @@
-// FIX: Corrected firebase import paths
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getDatabase } from "firebase/database";
+// firebase.ts (mock-safe)
+// If you want to use real Firebase later, replace this file with actual firebase initializeApp code.
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDL6-45uWfOnfWFMyy6m_BrJFQzteqv0SM",
-  authDomain: "studio-459716806-f8b73.firebaseapp.com",
-  databaseURL: "https://studio-459716806-f8b73-default-rtdb.firebaseio.com",
-  projectId: "studio-459716806-f8b73",
-  storageBucket: "studio-459716806-f8b73.firebasestorage.app",
-  messagingSenderId: "976268963893",
-  appId: "1:976268963893:web:a1f14c5c58c6010395017c"
+type MockAuth = {
+  currentUser: any;
+  // minimal API used by your app:
+  signOut: () => Promise<void>;
+  onAuthStateChanged: (cb: (user: any) => void) => (() => void);
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+type MockDatabase = {
+  // a super simple in-memory DB with get/set and listeners
+  _data: Record<string, any>;
+  ref: (path: string) => { on: (event: string, cb: (snap: any) => void) => void; set: (v: any) => void; once: (ev: string) => Promise<any> };
+};
 
-// Initialize Firebase Authentication and export it
-export const auth = getAuth(app);
+const auth: MockAuth = {
+  currentUser: null,
+  signOut: async () => { auth.currentUser = null; },
+  onAuthStateChanged: (cb) => {
+    // call immediately with null (not logged in)
+    setTimeout(() => cb(auth.currentUser), 0);
+    // return unsubscribe (no-op)
+    return () => {};
+  }
+};
 
-// Initialize Firebase Realtime Database and export it
-export const database = getDatabase(app);
+const database: MockDatabase = {
+  _data: {},
+  ref: (path: string) => {
+    return {
+      on: (_event: string, cb: (snap: any) => void) => {
+        // call callback with a snapshot-like object
+        const val = database._data[path] ?? null;
+        cb({ val: () => val });
+      },
+      set: (v: any) => { database._data[path] = v; },
+      once: async (_ev: string) => ({ val: () => database._data[path] ?? null })
+    };
+  }
+};
+
+export { auth, database };
+export default { auth, database };
