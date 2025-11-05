@@ -6,9 +6,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      // map any problematic client AI SDK import to our local mock
       "@google/genai": path.resolve(__dirname, "services/aiMock.ts"),
-      // if code imports firebase directly in a client-only way and it breaks builds, map it too:
+      // firebase client imports can be mapped if they cause build errors:
       "firebase/app": path.resolve(__dirname, "services/aiMock.ts"),
       "firebase/auth": path.resolve(__dirname, "services/aiMock.ts"),
       "firebase/database": path.resolve(__dirname, "services/aiMock.ts"),
