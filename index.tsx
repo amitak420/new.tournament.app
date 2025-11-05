@@ -1,20 +1,27 @@
-// index.tsx (temporary debug entry)
+// index.tsx
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 
-const rootEl = document.getElementById("root");
-if (!rootEl) {
-  document.body.innerHTML = "<h1 style='color:red'>No root element found</h1>";
+const rootElement = document.getElementById("root");
+
+window.addEventListener("error", (e) => {
+  console.error("Window error:", e.error || e.message);
+  document.body.innerHTML = `<pre style="color:red;font-size:16px;">Error: ${e.message}</pre>`;
+});
+
+window.addEventListener("unhandledrejection", (e) => {
+  console.error("Promise rejection:", e.reason);
+  document.body.innerHTML = `<pre style="color:orange;font-size:16px;">Promise Rejection: ${JSON.stringify(e.reason)}</pre>`;
+});
+
+if (rootElement) {
+  const root = createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 } else {
-  try {
-    createRoot(rootEl).render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    );
-  } catch (err) {
-    console.error("Render error:", err);
-    document.body.innerHTML = `<pre style="color:red">Render error: ${String(err)}</pre>`;
-  }
+  document.body.innerHTML = `<h1 style="color:red;">❌ Root div not found!</h1>`;
 }
