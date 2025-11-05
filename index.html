@@ -1,25 +1,27 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>eSports Arena (Demo)</title>
-    <meta name="robots" content="noindex" />
-    <!-- Minimal safe CSS while debugging -->
-    <link rel="stylesheet" href="/safe.css" />
-  </head>
+// index.tsx
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
 
-  <body>
-    <div id="root"></div>
+const rootElement = document.getElementById("root");
 
-    <!-- Unregister any old service workers (prevents cross-origin SW errors) -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then((regs) => regs.forEach(r => r.unregister())).catch(()=>{});
-      }
-    </script>
+window.addEventListener("error", (e) => {
+  console.error("Window error:", e.error || e.message);
+  document.body.innerHTML = `<pre style="color:red;font-size:16px;">Error: ${e.message}</pre>`;
+});
 
-    <!-- Vite entry (make sure index.tsx exists in repo root or src/ path) -->
-    <script type="module" src="/index.tsx"></script>
-  </body>
-</html>
+window.addEventListener("unhandledrejection", (e) => {
+  console.error("Promise rejection:", e.reason);
+  document.body.innerHTML = `<pre style="color:orange;font-size:16px;">Promise Rejection: ${e.reason}</pre>`;
+});
+
+if (rootElement) {
+  const root = createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+} else {
+  document.body.innerHTML = `<h1 style="color:red;">❌ Root div not found!</h1>`;
+}
