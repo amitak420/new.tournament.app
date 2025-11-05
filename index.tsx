@@ -1,16 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+// index.tsx (temporary debug entry)
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
 
-// Firebase config import karo
-// FIX: Corrected firebase import path
-import './firebase';
-
-const rootElement = document.getElementById('root');
-const root = ReactDOM.createRoot(rootElement!);
-
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const rootEl = document.getElementById("root");
+if (!rootEl) {
+  document.body.innerHTML = "<h1 style='color:red'>No root element found</h1>";
+} else {
+  try {
+    createRoot(rootEl).render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+  } catch (err) {
+    console.error("Render error:", err);
+    document.body.innerHTML = `<pre style="color:red">Render error: ${String(err)}</pre>`;
+  }
+}
