@@ -62,10 +62,10 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (theme === 'light') {
-      document.documentElement.classList.add('light-mode');
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('light-mode');
+      document.documentElement.classList.remove('dark');
     }
     localStorage.setItem('theme', theme);
   }, [theme]);

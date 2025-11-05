@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative z-10 border-t border-slate-400/10 bg-slate-900/60 px-5 py-8 mt-8">
+    <footer className="relative z-10 border-t border-slate-200 dark:border-slate-400/10 bg-slate-100 dark:bg-slate-900/60 px-5 py-8 mt-8">
       <div className="mx-auto max-w-5xl">
         <div className="mb-8 grid grid-cols-2 gap-8 text-center md:grid-cols-4 md:text-left">
           <FooterSection title="About">
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
             </div>
           </FooterSection>
         </div>
-        <div className="border-t border-slate-400/10 pt-6 text-center text-sm text-slate-400/70">
+        <div className="border-t border-slate-300 dark:border-slate-400/10 pt-6 text-center text-sm text-slate-500 dark:text-slate-400/70">
           <div className="mb-2 flex flex-wrap justify-center gap-x-4 gap-y-1">
             <FooterLink href="#">Privacy</FooterLink>
             <FooterLink href="#">Terms</FooterLink>
@@ -45,19 +45,19 @@ const Footer: React.FC = () => {
 
 const FooterSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div>
-    <h4 className="text-sm font-bold uppercase text-slate-200">{title}</h4>
+    <h4 className="text-sm font-bold uppercase text-slate-800 dark:text-slate-200">{title}</h4>
     <ul className="mt-2 space-y-2">{children}</ul>
   </div>
 );
 
 const FooterLink: React.FC<{ href: string; children: React.ReactNode }> = ({ href, children }) => (
   <li>
-    <a href={href} className="text-xs text-slate-300/60 transition-colors hover:text-blue-400">{children}</a>
+    <a href={href} className="text-xs text-slate-600 dark:text-slate-300/60 transition-colors hover:text-blue-400">{children}</a>
   </li>
 );
 
 const SocialLink: React.FC<{ href: string; 'aria-label': string; children: React.ReactNode }> = (props) => (
-  <a {...props} className="grid h-8 w-8 place-items-center rounded-full border border-slate-400/20 bg-slate-400/10 transition-all hover:-translate-y-0.5 hover:bg-blue-500/20" />
+  <a {...props} className="grid h-8 w-8 place-items-center rounded-full border border-slate-300 dark:border-slate-400/20 bg-slate-200 dark:bg-slate-400/10 transition-all hover:-translate-y-0.5 hover:bg-blue-500/20" />
 );
 
 

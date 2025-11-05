@@ -31,18 +31,18 @@ const getBadgeInfo = (tournament: any) => {
 
 const DashboardHome = ({ tournaments, userStats }: { tournaments: any[], userStats: any }) => (
     <div className="space-y-5">
-      <GlassCard className="p-6 bg-gradient-to-br from-purple-600/30 to-pink-600/30" glow>
+      <GlassCard className="p-6 bg-gradient-to-br from-purple-200/80 to-pink-200/80 dark:from-purple-600/30 dark:to-pink-600/30" glow>
         <div className="flex items-center gap-3 mb-4">
           <div className="p-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl">
             <Sparkles className="text-white" size={24} />
           </div>
           <div>
-            <p className="text-white/80 text-sm font-medium">Total Revenue</p>
-            <p className="text-4xl font-black text-white">₹{userStats.totalWinnings.toLocaleString()}</p>
+            <p className="text-slate-700 dark:text-white/80 text-sm font-medium">Total Revenue</p>
+            <p className="text-4xl font-black text-slate-900 dark:text-white">₹{userStats.totalWinnings.toLocaleString()}</p>
           </div>
         </div>
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-emerald-400 font-bold">
+          <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold">
             <TrendingUp size={18} />
             <span>+23% Growth</span>
           </div>
@@ -63,29 +63,29 @@ const DashboardHome = ({ tournaments, userStats }: { tournaments: any[], userSta
       </div>
 
       <GlassCard>
-        <div className="p-4 border-b border-white/10 flex items-center justify-between">
+        <div className="p-4 border-b border-black/10 dark:border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-            <h3 className="font-bold text-white">Live Updates</h3>
+            <h3 className="font-bold text-slate-900 dark:text-white">Live Updates</h3>
           </div>
-          <span className="text-xs text-cyan-400 font-bold uppercase">Real-time</span>
+          <span className="text-xs text-cyan-600 dark:text-cyan-400 font-bold uppercase">Real-time</span>
         </div>
-        <div className="divide-y divide-white/10">
+        <div className="divide-y divide-black/10 dark:divide-white/10">
           {tournaments.slice(0, 3).map((t, i) => {
             const badge = getBadgeInfo(t);
             const BadgeIcon = badge.icon;
             return (
-              <div key={i} className="p-4 flex items-center justify-between transform transition-all duration-300 hover:bg-white/5">
+              <div key={i} className="p-4 flex items-center justify-between transform transition-all duration-300 hover:bg-black/5 dark:hover:bg-white/5">
                 <div className="flex items-center gap-3 flex-1">
                   <div className={`p-2 rounded-lg bg-gradient-to-br ${badge.gradient}`}>
                     <BadgeIcon className="text-white" size={18} />
                   </div>
                   <div className="flex-1">
-                    <p className="font-bold text-white text-sm">{t.name}</p>
-                    <div className="w-full bg-white/10 rounded-full h-1.5 mt-2">
+                    <p className="font-bold text-slate-900 dark:text-white text-sm">{t.name}</p>
+                    <div className="w-full bg-black/10 dark:bg-white/10 rounded-full h-1.5 mt-2">
                       <div className={`h-1.5 rounded-full bg-gradient-to-r ${badge.gradient} transition-all duration-500`} style={{ width: `${(t.players/t.maxPlayers)*100}%` }}></div>
                     </div>
-                    <p className="text-xs text-white/60 mt-1">{t.players}/{t.maxPlayers} slots</p>
+                    <p className="text-xs text-slate-600 dark:text-white/60 mt-1">{t.players}/{t.maxPlayers} slots</p>
                   </div>
                 </div>
                 <span className={`px-3 py-1.5 text-xs font-bold rounded-lg ${badge.bgClass} ${badge.textClass} border ${badge.borderClass}`}>{badge.text}</span>
@@ -96,8 +96,8 @@ const DashboardHome = ({ tournaments, userStats }: { tournaments: any[], userSta
       </GlassCard>
 
       <GlassCard className="p-5">
-        <h3 className="font-bold text-white mb-4 flex items-center gap-2">
-          <BarChart3 className="text-cyan-400" size={20} />
+        <h3 className="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+          <BarChart3 className="text-cyan-500 dark:text-cyan-400" size={20} />
           Revenue Sources
         </h3>
         <div className="space-y-4">
@@ -109,10 +109,10 @@ const DashboardHome = ({ tournaments, userStats }: { tournaments: any[], userSta
           ].map((item, i) => (
             <div key={i} className="transform transition-all duration-300 hover:translate-x-2">
               <div className="flex justify-between mb-2">
-                <span className="text-white/80 text-sm font-semibold">{item.label}</span>
+                <span className="text-slate-700 dark:text-white/80 text-sm font-semibold">{item.label}</span>
                 <span className={`font-bold bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent`}>{item.value}</span>
               </div>
-              <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden">
+              <div className="w-full bg-black/10 dark:bg-white/10 rounded-full h-2.5 overflow-hidden">
                 <div className={`h-2.5 rounded-full bg-gradient-to-r ${item.gradient} transition-all duration-1000 shadow-lg`} style={{ width: `${item.percent}%` }}></div>
               </div>
             </div>
@@ -120,14 +120,14 @@ const DashboardHome = ({ tournaments, userStats }: { tournaments: any[], userSta
         </div>
       </GlassCard>
 
-      <GlassCard className="p-5 bg-gradient-to-br from-yellow-600/20 to-orange-600/20 border-yellow-500/30">
+      <GlassCard className="p-5 bg-gradient-to-br from-yellow-200/80 to-orange-200/80 dark:from-yellow-600/20 dark:to-orange-600/20 border-yellow-300 dark:border-yellow-500/30">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl animate-pulse">
             <Award className="text-white" size={24} />
           </div>
           <div className="flex-1">
-            <p className="font-black text-white text-lg">Top 5% Organizer! 🔥</p>
-            <p className="text-white/70 text-sm mt-1">Unlock Pro tier for 85% commission</p>
+            <p className="font-black text-slate-900 dark:text-white text-lg">Top 5% Organizer! 🔥</p>
+            <p className="text-slate-700 dark:text-white/70 text-sm mt-1">Unlock Pro tier for 85% commission</p>
           </div>
         </div>
         <NeonButton variant="gold" className="w-full mt-4 text-sm">
@@ -164,7 +164,7 @@ const TournamentManagement = ({ tournaments, onViewDetails }: { tournaments: any
 
             <div className="flex gap-2 overflow-x-auto pb-2">
                 {['All', 'Live', 'Scheduled', 'Completed'].map((tab) => (
-                <button key={tab} onClick={() => setActiveTab(tab)} className={`px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-300 ${activeTab === tab ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50' : 'backdrop-blur-xl bg-white/10 text-white/70 border border-white/20 hover:bg-white/20'}`}>
+                <button key={tab} onClick={() => setActiveTab(tab)} className={`px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-300 ${activeTab === tab ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50' : 'backdrop-blur-xl bg-black/10 dark:bg-white/10 text-slate-800 dark:text-white/70 border border-black/10 dark:border-white/20 hover:bg-black/20 dark:hover:bg-white/20'}`}>
                     {tab}
                 </button>
                 ))}
@@ -177,8 +177,8 @@ const TournamentManagement = ({ tournaments, onViewDetails }: { tournaments: any
                         <GlassCard key={i} className="p-5 transform transition-all duration-300 hover:scale-102 hover:-translate-y-1">
                         <div className="flex items-start justify-between mb-4">
                             <div className="flex-1">
-                            <h4 className="font-black text-white text-lg">{t.name}</h4>
-                            <p className="text-white/60 text-sm mt-1">₹{t.entry} entry • ₹{t.pool} prize pool</p>
+                            <h4 className="font-black text-slate-900 dark:text-white text-lg">{t.name}</h4>
+                            <p className="text-slate-600 dark:text-white/60 text-sm mt-1">₹{t.entry} entry • ₹{t.pool} prize pool</p>
                             </div>
                             <span className={`px-3 py-1.5 text-xs font-bold rounded-lg bg-gradient-to-r ${badge.gradient} text-white shadow-lg`}>
                             {badge.text}
@@ -186,18 +186,18 @@ const TournamentManagement = ({ tournaments, onViewDetails }: { tournaments: any
                         </div>
                         
                         <div className="mb-4">
-                            <div className="flex justify-between text-xs text-white/70 mb-2 font-semibold">
+                            <div className="flex justify-between text-xs text-slate-600 dark:text-white/70 mb-2 font-semibold">
                             <span>{t.players}/{t.maxPlayers} players</span>
                             <span>{Math.round(t.players/t.maxPlayers*100)}%</span>
                             </div>
-                            <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
+                            <div className="w-full bg-black/10 dark:bg-white/10 rounded-full h-3 overflow-hidden">
                             <div className={`h-3 rounded-full bg-gradient-to-r ${badge.gradient} transition-all duration-500 shadow-lg`} style={{ width: `${t.players/t.maxPlayers*100}%` }}></div>
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                        <div className="flex items-center justify-between pt-4 border-t border-black/10 dark:border-white/10">
                             <div>
-                            <p className="text-xs text-white/60 font-semibold uppercase">Your Revenue</p>
+                            <p className="text-xs text-slate-600 dark:text-white/60 font-semibold uppercase">Your Revenue</p>
                             <p className="text-2xl font-black bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">₹{t.revenue}</p>
                             </div>
                             <NeonButton onClick={() => onViewDetails(t.id)} variant="primary" className="text-sm py-2.5 px-5">
@@ -217,7 +217,7 @@ const TournamentDetailView = ({ tournament, onBack, onDelete }: { tournament: an
 
     return (
         <div className="space-y-5 animate-fadeIn">
-            <button onClick={onBack} className="flex items-center gap-2 text-white/70 hover:text-white font-bold transition-colors">
+            <button onClick={onBack} className="flex items-center gap-2 text-slate-600 dark:text-white/70 hover:text-slate-900 dark:hover:text-white font-bold transition-colors">
                 <ChevronLeft size={20} />
                 Back to Tournaments
             </button>
@@ -225,39 +225,39 @@ const TournamentDetailView = ({ tournament, onBack, onDelete }: { tournament: an
             <GlassCard className="p-5">
                 <div className="flex items-start justify-between mb-4">
                     <div>
-                        <h2 className="text-2xl font-black text-white">{tournament.name}</h2>
+                        <h2 className="text-2xl font-black text-slate-900 dark:text-white">{tournament.name}</h2>
                         <span className={`inline-block mt-2 px-3 py-1.5 text-xs font-bold rounded-lg bg-gradient-to-r ${badge.gradient} text-white shadow-lg`}>
                             {badge.text}
                         </span>
                     </div>
-                    <button className="backdrop-blur-xl bg-white/10 p-3 rounded-xl border border-white/20 hover:bg-white/20 transition-all">
-                        <Edit size={20} className="text-white" />
+                    <button className="backdrop-blur-xl bg-black/10 dark:bg-white/10 p-3 rounded-xl border border-black/10 dark:border-white/20 hover:bg-black/20 dark:hover:bg-white/20 transition-all">
+                        <Edit size={20} className="text-slate-800 dark:text-white" />
                     </button>
                 </div>
-                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
+                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-black/10 dark:border-white/10">
                     <div>
-                        <p className="text-xs text-white/60 font-semibold uppercase">Prize Pool</p>
+                        <p className="text-xs text-slate-600 dark:text-white/60 font-semibold uppercase">Prize Pool</p>
                         <p className="text-2xl font-black bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">₹{tournament.pool.toLocaleString()}</p>
                     </div>
                      <div>
-                        <p className="text-xs text-white/60 font-semibold uppercase">Entry Fee</p>
+                        <p className="text-xs text-slate-600 dark:text-white/60 font-semibold uppercase">Entry Fee</p>
                         <p className="text-2xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">₹{tournament.entry.toLocaleString()}</p>
                     </div>
                 </div>
             </GlassCard>
 
             <GlassCard>
-                 <div className="p-4 border-b border-white/10">
-                    <h3 className="font-bold text-white">Player List ({tournament.players}/{tournament.maxPlayers})</h3>
+                 <div className="p-4 border-b border-black/10 dark:border-white/10">
+                    <h3 className="font-bold text-slate-900 dark:text-white">Player List ({tournament.players}/{tournament.maxPlayers})</h3>
                 </div>
-                <div className="max-h-60 overflow-y-auto divide-y divide-white/10">
+                <div className="max-h-60 overflow-y-auto divide-y divide-black/10 dark:divide-white/10">
                     {tournament.participants.length > 0 ? tournament.participants.map((player: string, i: number) => (
-                         <div key={i} className="p-3 flex items-center justify-between text-sm hover:bg-white/5">
-                            <span className="font-semibold text-white/90">#{i + 1} {player}</span>
-                            <span className="text-xs text-white/50">Joined Nov {i+1}</span>
+                         <div key={i} className="p-3 flex items-center justify-between text-sm hover:bg-black/5 dark:hover:bg-white/5">
+                            <span className="font-semibold text-slate-800 dark:text-white/90">#{i + 1} {player}</span>
+                            <span className="text-xs text-slate-500 dark:text-white/50">Joined Nov {i+1}</span>
                         </div>
                     )) : (
-                        <div className="p-4 text-center text-sm text-white/60">No players have joined yet.</div>
+                        <div className="p-4 text-center text-sm text-slate-600 dark:text-white/60">No players have joined yet.</div>
                     )}
                 </div>
             </GlassCard>
@@ -272,58 +272,58 @@ const TournamentDetailView = ({ tournament, onBack, onDelete }: { tournament: an
 
 const WalletSection = ({ userStats }: { userStats: any }) => (
     <div className="space-y-5">
-      <GlassCard className="p-6 bg-gradient-to-br from-emerald-600/30 to-green-600/30" glow>
+      <GlassCard className="p-6 bg-gradient-to-br from-emerald-200/80 to-green-200/80 dark:from-emerald-600/30 dark:to-green-600/30" glow>
         <div className="flex items-center gap-3 mb-2">
-          <Wallet className="text-white" size={28} />
-          <p className="text-white/80 text-sm font-semibold uppercase tracking-wide">Available Balance</p>
+          <Wallet className="text-slate-800 dark:text-white" size={28} />
+          <p className="text-slate-700 dark:text-white/80 text-sm font-semibold uppercase tracking-wide">Available Balance</p>
         </div>
-        <p className="text-5xl font-black text-white mb-6">₹45,230</p>
+        <p className="text-5xl font-black text-slate-900 dark:text-white mb-6">₹45,230</p>
         <div className="flex gap-3">
           <NeonButton variant="success" className="flex-1">Withdraw</NeonButton>
-          <button className="flex-1 backdrop-blur-xl bg-white/10 border border-white/30 text-white py-3 px-6 rounded-xl font-bold hover:bg-white/20 transition-all">History</button>
+          <button className="flex-1 backdrop-blur-xl bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/30 text-slate-800 dark:text-white py-3 px-6 rounded-xl font-bold hover:bg-black/20 dark:hover:bg-white/20 transition-all">History</button>
         </div>
       </GlassCard>
 
       <div className="grid grid-cols-2 gap-3">
         <GlassCard className="p-4">
-          <p className="text-white/60 text-xs font-semibold mb-2 uppercase">Pending</p>
+          <p className="text-slate-600 dark:text-white/60 text-xs font-semibold mb-2 uppercase">Pending</p>
           <p className="text-2xl font-black bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">₹12,500</p>
         </GlassCard>
         <GlassCard className="p-4">
-          <p className="text-white/60 text-xs font-semibold mb-2 uppercase">Lifetime</p>
+          <p className="text-slate-600 dark:text-white/60 text-xs font-semibold mb-2 uppercase">Lifetime</p>
           <p className="text-2xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">₹{userStats.totalWinnings.toLocaleString()}</p>
         </GlassCard>
       </div>
 
-      <GlassCard className="p-5 bg-gradient-to-br from-blue-600/20 to-cyan-600/20 border-cyan-500/30">
+      <GlassCard className="p-5 bg-gradient-to-br from-blue-200/80 to-cyan-200/80 dark:from-blue-600/20 dark:to-cyan-600/20 border-cyan-300 dark:border-cyan-500/30">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg">
             <Zap className="text-white" size={20} />
           </div>
           <div className="flex-1">
-            <p className="font-black text-white">Commission Rate: 75%</p>
-            <p className="text-white/70 text-xs mt-1">₹47K more to unlock 80% rate</p>
+            <p className="font-black text-slate-900 dark:text-white">Commission Rate: 75%</p>
+            <p className="text-slate-700 dark:text-white/70 text-xs mt-1">₹47K more to unlock 80% rate</p>
           </div>
         </div>
-        <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
+        <div className="w-full bg-black/10 dark:bg-white/10 rounded-full h-3 overflow-hidden">
           <div className="h-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 shadow-lg transition-all duration-1000" style={{ width: '64%' }}></div>
         </div>
       </GlassCard>
 
       <GlassCard>
-        <div className="p-4 border-b border-white/10">
-          <h3 className="font-bold text-white">Recent Transactions</h3>
+        <div className="p-4 border-b border-black/10 dark:border-white/10">
+          <h3 className="font-bold text-slate-900 dark:text-white">Recent Transactions</h3>
         </div>
-        <div className="divide-y divide-white/10">
+        <div className="divide-y divide-black/10 dark:divide-white/10">
           {[
-            { desc: 'Withdrawal to Bank', amount: -25000, date: 'Nov 2', status: 'Completed', colorClass: 'text-white' },
-            { desc: 'BGMI Pro League', amount: 3450, date: 'Nov 1', status: 'Completed', colorClass: 'text-emerald-400' },
-            { desc: 'Valorant Cup', amount: 2800, date: 'Oct 31', status: 'Processing', colorClass: 'text-orange-400' },
+            { desc: 'Withdrawal to Bank', amount: -25000, date: 'Nov 2', status: 'Completed', colorClass: 'text-slate-800 dark:text-white' },
+            { desc: 'BGMI Pro League', amount: 3450, date: 'Nov 1', status: 'Completed', colorClass: 'text-emerald-600 dark:text-emerald-400' },
+            { desc: 'Valorant Cup', amount: 2800, date: 'Oct 31', status: 'Processing', colorClass: 'text-orange-500 dark:text-orange-400' },
           ].map((txn, i) => (
-            <div key={i} className="p-4 flex items-center justify-between hover:bg-white/5 transition-all">
+            <div key={i} className="p-4 flex items-center justify-between hover:bg-black/5 dark:hover:bg-white/5 transition-all">
               <div>
-                <p className="text-sm font-bold text-white">{txn.desc}</p>
-                <p className="text-xs text-white/60 mt-1">{txn.date} • {txn.status}</p>
+                <p className="text-sm font-bold text-slate-900 dark:text-white">{txn.desc}</p>
+                <p className="text-xs text-slate-600 dark:text-white/60 mt-1">{txn.date} • {txn.status}</p>
               </div>
               <p className={`font-black ${txn.colorClass} text-lg`}>
                 {txn.amount > 0 ? '+' : ''}₹{Math.abs(txn.amount).toLocaleString()}
@@ -338,8 +338,8 @@ const WalletSection = ({ userStats }: { userStats: any }) => (
 const PricingSection = () => (
     <div className="space-y-5">
       <div className="text-center mb-2">
-        <h2 className="text-3xl font-black text-white mb-2 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Choose Your Plan</h2>
-        <p className="text-white/70">Unlock premium features & better rates</p>
+        <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Choose Your Plan</h2>
+        <p className="text-slate-600 dark:text-white/70">Unlock premium features & better rates</p>
       </div>
 
       {[
@@ -347,7 +347,7 @@ const PricingSection = () => (
         { name: 'Premium', price: 299, commission: 80, features: ['Featured placement', '10 tournaments', 'Priority support', 'Advanced analytics'], gradient: 'from-cyan-500 to-blue-600', popular: true },
         { name: 'Pro', price: 999, commission: 85, features: ['Top placement', '30 tournaments', '24/7 support', 'API access', 'White-label'], gradient: 'from-purple-500 to-pink-600' },
       ].map((plan, i) => (
-        <GlassCard key={i} className={`p-6 relative ${plan.popular ? 'border-cyan-500/50 bg-gradient-to-br from-cyan-600/20 to-blue-600/20' : ''}`}>
+        <GlassCard key={i} className={`p-6 relative ${plan.popular ? 'border-cyan-500/50 bg-gradient-to-br from-cyan-200/80 to-blue-200/80 dark:from-cyan-600/20 dark:to-blue-600/20' : ''}`}>
           {plan.popular && (
             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
               <span className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg">⚡ POPULAR</span>
@@ -360,10 +360,10 @@ const PricingSection = () => (
           )}
           
           <div className="text-center mb-5">
-            <h3 className="text-xl font-black text-white mb-3">{plan.name}</h3>
+            <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3">{plan.name}</h3>
             <div>
-              <span className="text-5xl font-black text-white">₹{plan.price}</span>
-              <span className="text-white/60 text-sm">/month</span>
+              <span className="text-5xl font-black text-slate-900 dark:text-white">₹{plan.price}</span>
+              <span className="text-slate-600 dark:text-white/60 text-sm">/month</span>
             </div>
             <p className={`text-sm font-black mt-3 bg-gradient-to-r ${plan.gradient} bg-clip-text text-transparent`}>
               {plan.commission}% Commission Rate
@@ -372,7 +372,7 @@ const PricingSection = () => (
 
           <ul className="space-y-3 mb-6">
             {plan.features.map((feature, j) => (
-              <li key={j} className="flex items-center gap-3 text-sm text-white/90">
+              <li key={j} className="flex items-center gap-3 text-sm text-slate-800 dark:text-white/90">
                 <div className={`w-5 h-5 bg-gradient-to-r ${plan.gradient} rounded-full flex items-center justify-center flex-shrink-0`}>
                   <span className="text-white text-xs font-bold">✓</span>
                 </div>
@@ -382,7 +382,7 @@ const PricingSection = () => (
           </ul>
 
           {plan.current ? (
-            <button className="w-full backdrop-blur-xl bg-white/10 border border-white/30 text-white py-3 rounded-xl font-bold">Current Plan</button>
+            <button className="w-full backdrop-blur-xl bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/30 text-slate-800 dark:text-white py-3 rounded-xl font-bold">Current Plan</button>
           ) : (
             <NeonButton variant={plan.popular ? 'primary' : 'purple'} className="w-full">Upgrade Now ✨</NeonButton>
           )}
@@ -394,8 +394,8 @@ const PricingSection = () => (
 // --- HELPER COMPONENTS ---
 
 const GlassCard: React.FC<{ children: React.ReactNode, className?: string, glow?: boolean }> = ({ children, className = "", glow = false }) => (
-    <div className={`backdrop-blur-xl bg-white/10 rounded-2xl border border-white/20 shadow-2xl relative overflow-hidden ${className}`}>
-      {glow && <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 animate-pulse"></div>}
+    <div className={`backdrop-blur-xl bg-white/50 dark:bg-white/10 rounded-2xl border border-black/10 dark:border-white/20 shadow-2xl relative overflow-hidden ${className}`}>
+      {glow && <div className="absolute inset-0 bg-gradient-to-r from-cyan-200/50 via-purple-200/50 to-pink-200/50 dark:from-cyan-500/20 dark:via-purple-500/20 dark:to-pink-500/20 animate-pulse"></div>}
       <div className="relative z-10">{children}</div>
     </div>
 );
@@ -423,7 +423,7 @@ const StatCard: React.FC<{ title: string, value: string | number, change?: numbe
     <GlassCard className="p-5 transform transition-all duration-300 hover:scale-105 hover:-translate-y-1">
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
-          <p className="text-white/70 text-xs font-semibold mb-2 uppercase tracking-wider">{title}</p>
+          <p className="text-slate-600 dark:text-white/70 text-xs font-semibold mb-2 uppercase tracking-wider">{title}</p>
           <p className={`text-3xl font-black bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>{value}</p>
         </div>
         <div className={`p-3 rounded-xl bg-gradient-to-br ${gradient} shadow-lg`}>
@@ -431,7 +431,7 @@ const StatCard: React.FC<{ title: string, value: string | number, change?: numbe
         </div>
       </div>
       {change && (
-        <div className={`flex items-center gap-1.5 text-xs font-bold ${change > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+        <div className={`flex items-center gap-1.5 text-xs font-bold ${change > 0 ? 'text-emerald-500' : 'text-red-500'}`}>
           {change > 0 ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
           <span>{Math.abs(change)}% vs last month</span>
         </div>
@@ -532,20 +532,20 @@ const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStat
       case 'pricing': return <PricingSection />;
       default: return (
         <GlassCard className="p-12 text-center">
-          <BarChart3 className="mx-auto text-cyan-400 mb-4" size={56} />
-          <h3 className="font-bold text-white text-xl mb-2">{menuItems.find(m => m.id === activeSection)?.label}</h3>
-          <p className="text-white/60">Coming in full version</p>
+          <BarChart3 className="mx-auto text-cyan-500 dark:text-cyan-400 mb-4" size={56} />
+          <h3 className="font-bold text-slate-900 dark:text-white text-xl mb-2">{menuItems.find(m => m.id === activeSection)?.label}</h3>
+          <p className="text-slate-600 dark:text-white/60">Coming in full version</p>
         </GlassCard>
       );
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 relative overflow-hidden text-white">
+    <div className="min-h-screen bg-slate-100 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 relative overflow-hidden text-slate-900 dark:text-white">
       {particles.map(p => (
         <div
           key={p.id}
-          className="absolute rounded-full bg-white/20"
+          className="absolute rounded-full bg-black/10 dark:bg-white/20"
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
@@ -570,7 +570,7 @@ const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStat
         }
       `}</style>
 
-      <header className="backdrop-blur-xl bg-black/30 sticky top-0 z-50 border-b border-white/10">
+      <header className="backdrop-blur-xl bg-white/30 dark:bg-black/30 sticky top-0 z-50 border-b border-black/10 dark:border-white/10">
         <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/50">
@@ -578,24 +578,24 @@ const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStat
             </div>
             <div>
               <h1 className="font-black text-xl bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">eSports Arena</h1>
-              <p className="text-xs text-white/60 font-semibold">Organizer Pro</p>
+              <p className="text-xs text-slate-600 dark:text-white/60 font-semibold">Organizer Pro</p>
             </div>
           </div>
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 backdrop-blur-xl bg-white/10 rounded-lg border border-white/20 md:hidden">
-            {mobileMenuOpen ? <X className="text-white" size={24} /> : <Menu className="text-white" size={24} />}
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 backdrop-blur-xl bg-black/10 dark:bg-white/10 rounded-lg border border-black/10 dark:border-white/20 md:hidden">
+            {mobileMenuOpen ? <X className="text-slate-800 dark:text-white" size={24} /> : <Menu className="text-slate-800 dark:text-white" size={24} />}
           </button>
         </div>
       </header>
 
       {mobileMenuOpen && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40" onClick={() => setMobileMenuOpen(false)}>
-          <div className="backdrop-blur-xl bg-black/60 w-72 h-full p-6 shadow-2xl border-r border-white/10" onClick={(e) => e.stopPropagation()}>
+          <div className="backdrop-blur-xl bg-white/80 dark:bg-black/60 w-72 h-full p-6 shadow-2xl border-r border-black/10 dark:border-white/10" onClick={(e) => e.stopPropagation()}>
             <div className="space-y-2">
               {menuItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => { setActiveSection(item.id); setMobileMenuOpen(false); }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold transition-all ${activeSection === item.id ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg' : 'text-white/70 hover:bg-white/10'}`}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold transition-all ${activeSection === item.id ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg' : 'text-slate-700 dark:text-white/70 hover:bg-black/10 dark:hover:bg-white/10'}`}
                 >
                   <item.icon size={22} />
                   {item.label}
@@ -603,7 +603,7 @@ const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStat
               ))}
                 <button
                   onClick={onLogout}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold transition-all text-red-400/70 hover:bg-red-500/10`}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold transition-all text-red-500 dark:text-red-400/70 hover:bg-red-500/10`}
                 >
                   <X size={22} />
                   Logout
@@ -617,13 +617,13 @@ const OrganiserDashboard: React.FC<DashboardProps> = ({ user, onLogout, userStat
         {renderContent()}
       </main>
 
-      <nav className="fixed bottom-0 left-0 right-0 backdrop-blur-xl bg-black/40 border-t border-white/10 z-50">
+      <nav className="fixed bottom-0 left-0 right-0 backdrop-blur-xl bg-white/40 dark:bg-black/40 border-t border-black/10 dark:border-white/10 z-50">
         <div className="max-w-md mx-auto flex justify-around py-2">
           {menuItems.slice(0, 4).map((item) => ( // Show only first 4 in bottom nav for space
             <button
               key={item.id}
               onClick={() => setActiveSection(item.id)}
-              className={`flex flex-col items-center gap-1 px-3 py-1 rounded-lg transition-all ${activeSection === item.id ? 'text-cyan-400' : 'text-white/50'}`}
+              className={`flex flex-col items-center gap-1 px-3 py-1 rounded-lg transition-all ${activeSection === item.id ? 'text-cyan-500 dark:text-cyan-400' : 'text-slate-500 dark:text-white/50'}`}
             >
               <item.icon size={22} />
               <span className="text-xs font-medium">{item.label}</span>

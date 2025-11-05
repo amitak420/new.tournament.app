@@ -105,62 +105,60 @@ const LoginModal: React.FC<LoginModalProps> = ({ initialRole, onClose, onLogin }
     <div 
       className="fixed inset-0 z-50 flex animate-fadeIn items-center justify-center p-4"
       style={{
-        background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.2) 30%, rgba(3, 7, 18, 0.8))',
+        background: 'var(--modal-overlay-bg)',
         backdropFilter: 'blur(10.5px)'
       }}
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-sm rounded-3xl border border-slate-400/30 shadow-2xl backdrop-blur-2xl"
-        style={{
-          background: 'radial-gradient(circle at 0% 0%, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.35))'
-        }}
+        className="w-full max-w-sm rounded-3xl border border-slate-300 dark:border-slate-400/30 text-slate-900 dark:text-white shadow-2xl backdrop-blur-2xl"
+        style={{ background: 'var(--modal-content-bg)' }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between p-5 pb-3">
           <div>
-            <div className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs uppercase tracking-widest ${isPlayer ? 'bg-blue-600' : 'bg-orange-600'}`}>
+            <div className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs uppercase tracking-widest text-white ${isPlayer ? 'bg-blue-600' : 'bg-orange-600'}`}>
               <span className={`h-1.5 w-1.5 rounded-full ${isPlayer ? 'bg-green-400' : 'bg-yellow-300'}`}></span>
               {isPlayer ? 'Player Mode' : 'Organiser Mode'}
             </div>
             <h2 className="mt-2 text-xl font-bold">Welcome {initialRole}</h2>
-            <p className="text-xs text-slate-200/60">Sign in to continue to eSports Arena.</p>
+            <p className="text-xs text-slate-600 dark:text-slate-200/60">Sign in to continue to eSports Arena.</p>
           </div>
-          <button onClick={onClose} className="grid h-8 w-8 place-items-center rounded-full border border-slate-200/20 bg-slate-900/20 text-slate-200 transition-colors hover:bg-slate-900/40">✕</button>
+          <button onClick={onClose} className="grid h-8 w-8 place-items-center rounded-full border border-slate-300 dark:border-slate-200/20 bg-slate-200 dark:bg-slate-900/20 text-slate-700 dark:text-slate-200 transition-colors hover:bg-slate-300 dark:hover:bg-slate-900/40">✕</button>
         </div>
 
         <div className="p-5 pt-0">
           {!showEmailForm ? (
             <div className="space-y-4 animate-fadeIn">
-              <div className="flex justify-center items-center gap-2 bg-slate-800/50 border border-slate-700/50 rounded-full py-2">
+              <div className="flex justify-center items-center gap-2 bg-slate-200 dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700/50 rounded-full py-2">
                   <div className="flex -space-x-2 overflow-hidden">
                       <img className="inline-block h-6 w-6 rounded-full ring-2 ring-slate-900" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""/>
                       <img className="inline-block h-6 w-6 rounded-full ring-2 ring-slate-900" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""/>
                       <img className="inline-block h-6 w-6 rounded-full ring-2 ring-slate-900" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt=""/>
                   </div>
-                  <span className="text-sm font-semibold text-slate-300">Join 50,000+ Players</span>
+                  <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">Join 50,000+ Players</span>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                  <button className="flex items-center justify-center gap-2 rounded-lg bg-white/10 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20"><GoogleIcon /> Google</button>
-                  <button className="flex items-center justify-center gap-2 rounded-lg bg-white/10 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20"><DiscordIcon /> Discord</button>
+                  <button className="flex items-center justify-center gap-2 rounded-lg bg-slate-200 dark:bg-white/10 py-2.5 text-sm font-semibold text-slate-800 dark:text-white transition-colors hover:bg-slate-300 dark:hover:bg-white/20"><GoogleIcon /> Google</button>
+                  <button className="flex items-center justify-center gap-2 rounded-lg bg-slate-200 dark:bg-white/10 py-2.5 text-sm font-semibold text-slate-800 dark:text-white transition-colors hover:bg-slate-300 dark:hover:bg-white/20"><DiscordIcon /> Discord</button>
               </div>
-              <div className="flex items-center"><hr className="w-full border-slate-700" /><span className="px-2 text-xs text-slate-500">OR</span><hr className="w-full border-slate-700" /></div>
-              <button onClick={() => setShowEmailForm(true)} className="w-full rounded-lg bg-slate-700/70 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-700">Continue with Email</button>
+              <div className="flex items-center"><hr className="w-full border-slate-300 dark:border-slate-700" /><span className="px-2 text-xs text-slate-500">OR</span><hr className="w-full border-slate-300 dark:border-slate-700" /></div>
+              <button onClick={() => setShowEmailForm(true)} className="w-full rounded-lg bg-slate-600 dark:bg-slate-700/70 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-700 dark:hover:bg-slate-700">Continue with Email</button>
             </div>
           ) : (
             <div className="animate-fadeIn">
-                <div className="mx-5 mb-1 flex rounded-full border border-slate-800/50 bg-slate-900/40 p-1">
-                    <button onClick={() => setActiveTab('login')} className={`flex-1 rounded-full py-1 text-sm font-semibold transition-colors ${activeTab === 'login' ? 'bg-slate-800 text-white' : 'text-slate-400'}`}>Login</button>
-                    <button onClick={() => setActiveTab('register')} className={`flex-1 rounded-full py-1 text-sm font-semibold transition-colors ${activeTab === 'register' ? 'bg-slate-800 text-white' : 'text-slate-400'}`}>Register</button>
+                <div className="mx-5 mb-1 flex rounded-full border border-slate-300 dark:border-slate-800/50 bg-slate-200 dark:bg-slate-900/40 p-1">
+                    <button onClick={() => setActiveTab('login')} className={`flex-1 rounded-full py-1 text-sm font-semibold transition-colors ${activeTab === 'login' ? 'bg-slate-500 dark:bg-slate-800 text-white' : 'text-slate-600 dark:text-slate-400'}`}>Login</button>
+                    <button onClick={() => setActiveTab('register')} className={`flex-1 rounded-full py-1 text-sm font-semibold transition-colors ${activeTab === 'register' ? 'bg-slate-500 dark:bg-slate-800 text-white' : 'text-slate-600 dark:text-slate-400'}`}>Register</button>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-4 p-5 pt-3">
                     <div className="relative">
-                        <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><EmailIcon /></span>
-                        <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" required className="w-full rounded-lg border border-slate-700 bg-slate-900/50 py-2 pl-9 pr-3 text-sm text-white outline-none transition-colors focus:border-blue-500" />
+                        <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400"><EmailIcon /></span>
+                        <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" required className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-900/50 py-2 pl-9 pr-3 text-sm text-slate-900 dark:text-white outline-none transition-colors focus:border-blue-500" />
                     </div>
                     <div className="relative">
-                        <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><PasswordIcon /></span>
-                        <input type={showPassword ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} placeholder={activeTab === 'login' ? '••••••••' : 'Create strong password'} required className="w-full rounded-lg border border-slate-700 bg-slate-900/50 py-2 pl-9 pr-10 text-sm text-white outline-none transition-colors focus:border-blue-500" />
+                        <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400"><PasswordIcon /></span>
+                        <input type={showPassword ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)} placeholder={activeTab === 'login' ? '••••••••' : 'Create strong password'} required className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-900/50 py-2 pl-9 pr-10 text-sm text-slate-900 dark:text-white outline-none transition-colors focus:border-blue-500" />
                         <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">{showPassword ? <EyeOff size={16}/> : <Eye size={16}/>}</button>
                         {activeTab === 'register' && password.length > 0 && <div className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-slate-700"><div className={`h-full rounded-full transition-all duration-300 ${strengthClasses[passwordStrength]}`}></div></div>}
                     </div>
@@ -170,11 +168,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ initialRole, onClose, onLogin }
                     {activeTab === 'register' && (
                         <>
                             <div className="relative">
-                                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><IgnIcon /></span>
-                                <input type="text" value={ign} onChange={e => setIgn(e.target.value)} placeholder="Your IGN / Team name" required className="w-full rounded-lg border border-slate-700 bg-slate-900/50 py-2 pl-9 pr-3 text-sm text-white outline-none transition-colors focus:border-blue-500" />
+                                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400"><IgnIcon /></span>
+                                <input type="text" value={ign} onChange={e => setIgn(e.target.value)} placeholder="Your IGN / Team name" required className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-900/50 py-2 pl-9 pr-3 text-sm text-slate-900 dark:text-white outline-none transition-colors focus:border-blue-500" />
                             </div>
-                            <div className="flex items-start gap-3"><input id="2fa" type="checkbox" checked={enable2FA} onChange={e => setEnable2FA(e.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer" /><label htmlFor="2fa" className="text-xs text-slate-400">Enable two-factor authentication</label></div>
-                            <div className="flex items-start gap-3"><input id="terms" type="checkbox" checked={termsAccepted} onChange={e => setTermsAccepted(e.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer" /><label htmlFor="terms" className="text-xs text-slate-400">I agree to eSports Arena <a href="#" className="font-semibold text-blue-400 hover:underline">Terms</a> and <a href="#" className="font-semibold text-blue-400 hover:underline">Privacy Policy</a></label></div>
+                            <div className="flex items-start gap-3"><input id="2fa" type="checkbox" checked={enable2FA} onChange={e => setEnable2FA(e.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer" /><label htmlFor="2fa" className="text-xs text-slate-600 dark:text-slate-400">Enable two-factor authentication</label></div>
+                            <div className="flex items-start gap-3"><input id="terms" type="checkbox" checked={termsAccepted} onChange={e => setTermsAccepted(e.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer" /><label htmlFor="terms" className="text-xs text-slate-600 dark:text-slate-400">I agree to eSports Arena <a href="#" className="font-semibold text-blue-400 hover:underline">Terms</a> and <a href="#" className="font-semibold text-blue-400 hover:underline">Privacy Policy</a></label></div>
                         </>
                     )}
                     {error && <p className="text-center text-xs text-red-400">{error}</p>}
@@ -187,7 +185,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ initialRole, onClose, onLogin }
           )}
         </div>
         
-        <div className="border-t border-slate-800 px-5 py-3 text-center text-xs text-slate-400">
+        <div className="border-t border-slate-300 dark:border-slate-800 px-5 py-3 text-center text-xs text-slate-600 dark:text-slate-400">
             {showEmailForm ? (
                 <button onClick={() => setShowEmailForm(false)} className="font-semibold text-blue-400 hover:underline">← Back to Quick Login</button>
             ) : ( activeTab === 'login' ? (

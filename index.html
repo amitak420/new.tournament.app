@@ -3,29 +3,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>eSports Arena | Enter the Arena</title>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
       :root {
-        --bg: radial-gradient(circle at 10% 10%, #0f172a 0%, #040617 45%, #030712 100%);
-        --bg-light: #f8fafc;
+        --bg: #f8fafc;
+        --text: #1f2937;
+        --surface: rgba(248, 250, 252, 0.7);
         --blue: #3b82f6;
         --purple: #8b5cf6;
         --orange: #f97316;
         --gold: #fbbf24;
-        --text: #e2e8f0;
-        --text-light: #1f2937;
         --muted: #94a3b8;
-        --surface: rgba(3, 7, 18, 0.55);
         --header-h: 68px;
+        --modal-overlay-bg: rgba(241, 245, 249, 0.8);
+        --modal-content-bg: #ffffff;
       }
-      html.light-mode {
-        --bg: var(--bg-light);
-        --text: var(--text-light);
-        --surface: rgba(248, 250, 252, 0.7);
-        --bg-gradient: linear-gradient(90deg, #1f2937 0%, #374151 50%, #f97316 100%);
+      html.dark {
+        --bg: radial-gradient(circle at 10% 10%, #0f172a 0%, #040617 45%, #030712 100%);
+        --text: #e2e8f0;
+        --surface: rgba(3, 7, 18, 0.55);
+        --modal-overlay-bg: radial-gradient(circle at center, rgba(15, 23, 42, 0.2) 30%, rgba(3, 7, 18, 0.8));
+        --modal-content-bg: radial-gradient(circle at 0% 0%, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.35));
       }
       body {
         margin: 0;
@@ -33,8 +39,40 @@
         background: var(--bg);
         color: var(--text);
         transition: background 300ms ease-out, color 300ms ease-out;
+        position: relative;
+        overflow-x: hidden;
       }
-       @keyframes pulse {
+      html.dark body::before,
+      html.dark body::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        border-radius: 50%;
+        filter: blur(150px);
+        animation: aurora 15s infinite linear alternate;
+      }
+      html.dark body::before {
+        width: 600px;
+        height: 600px;
+        background-color: rgba(139, 92, 246, 0.15); /* --purple */
+        top: -200px;
+        left: -200px;
+      }
+      html.dark body::after {
+        width: 500px;
+        height: 500px;
+        background-color: rgba(59, 130, 246, 0.1); /* --blue */
+        bottom: -150px;
+        right: -150px;
+        animation-duration: 20s;
+        animation-delay: -5s;
+      }
+      @keyframes aurora {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        50% { transform: translate(100px, 80px) rotate(180deg); }
+        100% { transform: translate(-20px, -50px) rotate(360deg); }
+      }
+      @keyframes pulse {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.5; }
       }
@@ -43,8 +81,9 @@
       // Immediately set the theme on page load to prevent flashing
       (function() {
         const theme = localStorage.getItem("theme");
-        if (theme === "light") {
-          document.documentElement.classList.add("light-mode");
+        // Default to dark theme if no setting is found
+        if (theme !== "light") {
+          document.documentElement.classList.add("dark");
         }
       })();
     </script>
