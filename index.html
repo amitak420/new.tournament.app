@@ -10,6 +10,8 @@
 
     <meta name="robots" content="noindex">
   </head>
+
+  <!-- BODY: Inline test + unregister SW + module loader -->
   <body>
     <div id="root"></div>
 
@@ -20,7 +22,32 @@
       }
     </script>
 
-    <!-- load app entry -->
+    <!-- INLINE SMOKE TEST: this should appear immediately on the page -->
+    <script>
+      (function(){
+        var root = document.getElementById('root');
+        if (root) {
+          root.innerHTML = `
+            <div style="font-family:Inter,Arial,sans-serif;color:#e6eef8;text-align:center;padding:80px;">
+              <h1 style="font-size:28px;margin-bottom:8px;">App test: HTML ok ✔️</h1>
+              <div style="opacity:.9">If you see this — HTML loads fine. Next: module JS may be failing to run. Please check Console (F12 → Console).</div>
+              <div style="margin-top:18px;"><button id="runModule" style="padding:10px 14px;border-radius:8px;background:#7c3aed;color:#fff;border:none;cursor:pointer">Try running app module</button></div>
+            </div>
+          `;
+          // allow user to manually try loading module
+          document.getElementById('runModule').onclick = function() {
+            var s = document.createElement('script');
+            s.type = 'module';
+            s.src = '/index.tsx';
+            s.onload = function(){ console.log('module loaded (attempt)'); };
+            s.onerror = function(e){ console.error('module load failed', e); alert('Module failed to load — check Console.'); };
+            document.body.appendChild(s);
+          };
+        }
+      })();
+    </script>
+
+    <!-- Keep module loader too (app entry) -->
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
