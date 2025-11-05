@@ -10,16 +10,15 @@
   <body>
     <div id="root"></div>
 
-    <!-- Unregister old service workers (prevent SW origin errors) -->
+    <!-- Unregister old service workers to avoid cross-origin SW errors -->
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister())).catch(()=>{});
+        navigator.serviceWorker.getRegistrations()
+          .then(regs => regs.forEach(r => r.unregister()))
+          .catch(()=>{});
       }
     </script>
 
-    <!-- Let Vite/Build inject the real bundle in production.
-         Keep module src pointing to your app entry (index.tsx).
-         During build Vite will replace with compiled assets. -->
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
