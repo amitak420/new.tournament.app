@@ -3,22 +3,19 @@ import React from "react";
 
 export default function App() {
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "#05051a",
-        color: "white",
-        fontFamily: "Poppins, sans-serif",
-      }}
-    >
-      <h1 style={{ fontSize: "2rem" }}>🔥 eSports Arena Platform 🔥</h1>
-      <p style={{ marginTop: 10, opacity: 0.8 }}>
-        If you see this, React is rendering successfully.
-      </p>
+    <div style={{
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "linear-gradient(#051029, #07112a)",
+      color: "#fff",
+      fontFamily: "Inter, Arial, sans-serif"
+    }}>
+      <div style={{ textAlign: "center" }}>
+        <h1 style={{fontSize: 28, margin: 0}}>🔥 eSports Arena</h1>
+        <p style={{opacity: 0.8, marginTop: 10}}>Demo build loaded — React is rendering.</p>
+      </div>
     </div>
   );
 }
